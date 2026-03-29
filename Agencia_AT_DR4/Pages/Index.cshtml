@@ -1,0 +1,61 @@
+﻿@page
+@model Agencia_AT_DR4.Pages.IndexModel
+@{
+    ViewData["Title"] = "Agência de Turismo - AT_DR4";
+}
+
+<h1>Menu de Exercícios — Agência de Turismo</h1>
+
+<div class="menu">
+    <ul>
+        @foreach (var ex in Model.Exercises)
+        {
+            <li>
+                @if (ex.Ativo)
+                {
+                    <a asp-page="@ex.Page">Exercício @ex.Number — @ex.Title</a>
+                }
+                else
+                {
+                    <span class="inativo">Exercício @ex.Number — @ex.Title</span>
+                }
+            </li>
+        }
+    </ul>
+</div>
+
+<style>
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .menu ul {
+        list-style-type: none;
+        padding: 0;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .menu li {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .menu a {
+        text-decoration: none;
+        font-weight: bold;
+        color: #0077cc;
+    }
+
+        .menu a:hover {
+            text-decoration: underline;
+        }
+
+    .inativo {
+        color: #999;
+        font-weight: bold;
+    }
+</style>

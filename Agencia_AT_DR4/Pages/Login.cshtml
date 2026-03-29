@@ -1,0 +1,48 @@
+﻿@page
+@model Agencia_AT_DR4.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login — Agência de Turismo</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-body p-4">
+                        <h4 class="text-center mb-4">🌍 Agência de Turismo</h4>
+
+                        @if (Model.Erro != null)
+                        {
+                            <div class="alert alert-danger">@Model.Erro</div>
+                        }
+
+                        <form method="post">
+                            <div class="mb-3">
+                                <label asp-for="Usuario" class="form-label">Usuário</label>
+                                <input asp-for="Usuario" class="form-control" placeholder="admin" />
+                                <span asp-validation-for="Usuario" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Senha" class="form-label">Senha</label>
+                                <input asp-for="Senha" class="form-control" type="password" placeholder="••••••••" />
+                                <span asp-validation-for="Senha" class="text-danger"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

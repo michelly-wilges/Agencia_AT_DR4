@@ -1,0 +1,42 @@
+﻿@page
+@model Agencia_AT_DR4.Pages.Delegates.AlertaCapacidadeModel
+@{
+    ViewData["Title"] = "Exercício 4 — Evento de Capacidade";
+}
+
+<h2>Exercício 4 — Evento de Alerta para Limite de Capacidade</h2>
+<p class="text-muted">Simule reservas em um pacote e veja o evento disparar quando a capacidade for atingida.</p>
+
+<form method="post" style="max-width: 400px;">
+    <div class="mb-3">
+        <label asp-for="CapacidadeMaxima" class="form-label">Capacidade Máxima do Pacote</label>
+        <input asp-for="CapacidadeMaxima" class="form-control" type="number" placeholder="Ex: 5" />
+        <span asp-validation-for="CapacidadeMaxima" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="NumeroReservas" class="form-label">Número de Reservas a Simular</label>
+        <input asp-for="NumeroReservas" class="form-control" type="number" placeholder="Ex: 6" />
+        <span asp-validation-for="NumeroReservas" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Simular</button>
+    <a asp-page="/Index" class="btn btn-secondary">Voltar</a>
+</form>
+
+@if (Model.Mensagens.Any())
+{
+    <div class="mt-4" style="max-width: 500px;">
+        <h5>Resultado da simulação:</h5>
+        <ul class="list-group">
+            @foreach (var msg in Model.Mensagens)
+            {
+                <li class="list-group-item @(msg.Contains("EVENTO") ? "list-group-item-danger" : msg.Contains("⚠️") ? "list-group-item-warning" : "list-group-item-success")">
+                    @msg
+                </li>
+            }
+        </ul>
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

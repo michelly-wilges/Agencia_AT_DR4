@@ -1,0 +1,54 @@
+﻿@page "{id:int}"
+@model Agencia_AT_DR4.Pages.PacoteManager.PacoteDetailsModel
+@{
+    ViewData["Title"] = "Detalhes do Pacote";
+}
+
+@if (Model.Pacote == null)
+{
+    <div class="alert alert-warning">Pacote não encontrado.</div>
+    <a asp-page="/Index" class="btn btn-secondary">Voltar</a>
+}
+else
+{
+    <h2>Exercício 7 — Detalhes do Pacote</h2>
+
+    <div class="card mt-3" style="max-width: 600px;">
+        <div class="card-body">
+            <h4 class="card-title">@Model.Pacote.Titulo</h4>
+            <p><strong>Data de Início:</strong> @Model.Pacote.DataInicio.ToString("dd/MM/yyyy")</p>
+            <p><strong>Preço por Pessoa:</strong> R$ @Model.Pacote.Preco.ToString("F2")</p>
+            <p><strong>Capacidade Máxima:</strong> @Model.Pacote.CapacidadeMaxima participantes</p>
+            <p><strong>Vagas Disponíveis:</strong> @(Model.Pacote.CapacidadeMaxima - Model.Pacote.Reservas.Count)</p>
+        </div>
+    </div>
+
+    <h5 class="mt-4">Reservas (@Model.Pacote.Reservas.Count)</h5>
+
+    @if (!Model.Pacote.Reservas.Any())
+    {
+        <p class="text-muted">Nenhuma reserva cadastrada para este pacote.</p>
+    }
+    else
+    {
+        <table class="table table-striped mt-2" style="max-width: 600px;">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Data da Reserva</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reserva in Model.Pacote.Reservas)
+                {
+                    <tr>
+                        <td>@reserva.Cliente.Nome</td>
+                        <td>@reserva.DataReserva.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <a asp-page="/Index" class="btn btn-secondary mt-2">Voltar</a>
+}

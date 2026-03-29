@@ -1,0 +1,36 @@
+﻿@page
+@model Agencia_AT_DR4.Pages.Delegates.LogModel
+@{
+    ViewData["Title"] = "Exercício 2 — Multicast Delegate";
+}
+
+<h2>Exercício 2 — Multicast Delegate para Log</h2>
+<p class="text-muted">Registre uma operação do sistema. O log será enviado para o console, arquivo e memória simultaneamente.</p>
+
+<form method="post" style="max-width: 400px;">
+    <div class="mb-3">
+        <label asp-for="Operacao" class="form-label">Operação</label>
+        <input asp-for="Operacao" class="form-control" placeholder="Ex: Reserva criada para cliente João" />
+        <span asp-validation-for="Operacao" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar Log</button>
+    <a asp-page="/Index" class="btn btn-secondary">Voltar</a>
+</form>
+
+@if (Model.Logs.Any())
+{
+    <div class="mt-4" style="max-width: 600px;">
+        <h5>Logs registrados em memória:</h5>
+        <ul class="list-group">
+            @foreach (var log in Model.Logs)
+            {
+                <li class="list-group-item">@log</li>
+            }
+        </ul>
+        <small class="text-muted">O log também foi salvo em wwwroot/logs/log.txt e exibido no console do Visual Studio.</small>
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

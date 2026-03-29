@@ -1,0 +1,46 @@
+﻿@page
+@model Agencia_AT_DR4.Pages.ReservaManager.CreateReservaModel
+@{
+    ViewData["Title"] = "Exercício 5 — Cadastro de Reserva";
+}
+
+<h2>Exercício 5 — Cadastro de Reserva</h2>
+<p class="text-muted">Preencha os dados para cadastrar uma nova reserva.</p>
+
+@if (!ModelState.IsValid && ModelState.ErrorCount > 0)
+{
+    <div class="alert alert-danger" style="max-width: 500px;">
+        @foreach (var erro in ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p class="mb-0">@erro.ErrorMessage</p>
+        }
+    </div>
+}
+
+<form method="post" style="max-width: 500px;">
+    <div class="mb-3">
+        <label asp-for="Input.ClienteId" class="form-label">Cliente</label>
+        <select asp-for="Input.ClienteId" asp-items="Model.ClienteOptions" class="form-select">
+            <option value="">-- Selecione --</option>
+        </select>
+        <span asp-validation-for="Input.ClienteId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Input.PacoteTuristicoId" class="form-label">Pacote Turístico</label>
+        <select asp-for="Input.PacoteTuristicoId" asp-items="Model.PacoteOptions" class="form-select">
+            <option value="">-- Selecione --</option>
+        </select>
+        <span asp-validation-for="Input.PacoteTuristicoId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Input.DataReserva" class="form-label">Data da Reserva</label>
+        <input asp-for="Input.DataReserva" class="form-control" type="date" />
+        <span asp-validation-for="Input.DataReserva" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+    <a asp-page="/Index" class="btn btn-secondary">Voltar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

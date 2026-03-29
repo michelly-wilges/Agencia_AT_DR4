@@ -1,0 +1,66 @@
+﻿@page
+@model Agencia_AT_DR4.Pages.NotasManager.ViewNotesModel
+@{
+    ViewData["Title"] = "Exercício 8 — Sistema de Notas";
+}
+
+<h2>Exercício 8 — Sistema de Notas</h2>
+
+@if (TempData["Sucesso"] != null)
+{
+    <div class="alert alert-success" style="max-width: 600px;">@TempData["Sucesso"]</div>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h5>Nova Anotação</h5>
+        <form method="post" style="max-width: 500px;">
+            <div class="mb-3">
+                <label asp-for="NomeArquivo" class="form-label">Nome do Arquivo</label>
+                <input asp-for="NomeArquivo" class="form-control" placeholder="Ex: reuniao_abril" />
+                <span asp-validation-for="NomeArquivo" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Conteudo" class="form-label">Conteúdo</label>
+                <textarea asp-for="Conteudo" class="form-control" rows="5" placeholder="Digite sua anotação..."></textarea>
+                <span asp-validation-for="Conteudo" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a asp-page="/Index" class="btn btn-secondary">Voltar</a>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <h5>Arquivos Salvos</h5>
+        @if (!Model.Arquivos.Any())
+        {
+            <p class="text-muted">Nenhuma anotação salva ainda.</p>
+        }
+        else
+        {
+            <ul class="list-group mb-3">
+                @foreach (var arquivo in Model.Arquivos)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        @arquivo
+                        <a asp-page="/NotasManager/ViewNotes" asp-route-arquivo="@arquivo" class="btn btn-sm btn-outline-primary">Ver</a>
+                    </li>
+                }
+            </ul>
+        }
+
+        @if (Model.ConteudoSelecionado != null)
+        {
+            <div class="card">
+                <div class="card-header">📄 @Model.ArquivoSelecionado</div>
+                <div class="card-body">
+                    <pre>@Model.ConteudoSelecionado</pre>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,31 @@
+﻿@page
+@model Agencia_AT_DR4.Pages.Delegates.DescontoModel
+@{
+    ViewData["Title"] = "Exercício 1 — Desconto com Delegate";
+}
+
+<h2>Exercício 1 — Cálculo de Desconto com Delegate</h2>
+<p class="text-muted">Informe o preço do pacote e veja o valor com 10% de desconto aplicado.</p>
+
+<form method="post" style="max-width: 400px;">
+    <div class="mb-3">
+        <label asp-for="Preco" class="form-label">Preço do Pacote (R$)</label>
+        <input asp-for="Preco" class="form-control" type="number" step="0.01" placeholder="Ex: 1500.00" />
+        <span asp-validation-for="Preco" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Calcular</button>
+    <a asp-page="/Index" class="btn btn-secondary">Voltar</a>
+</form>
+
+@if (Model.PrecoComDesconto.HasValue)
+{
+    <div class="alert alert-success mt-4" style="max-width: 400px;">
+        <p>Preço original: <strong>R$ @Model.Preco!.Value.ToString("F2")</strong></p>
+        <p>Desconto aplicado: <strong>10%</strong></p>
+        <p>Preço com desconto: <strong>R$ @Model.PrecoComDesconto.Value.ToString("F2")</strong></p>
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
