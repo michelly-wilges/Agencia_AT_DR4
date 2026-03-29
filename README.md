@@ -1,6 +1,6 @@
-# Agencia_AT_DR4 — Assessment
+# Agencia_AT_DR4 — Avaliação Final
 
-Sistema de gerenciamento para uma agência de turismo desenvolvido em ASP.NET Core Razor Pages com Entity Framework Core e SQLite.
+Sistema de gerenciamento para uma agência de turismo que oferece pacotes turísticos, cadastro de clientes, reservas e controle de disponibilidade de destinos. Desenvolvido em ASP.NET Core Razor Pages com Entity Framework Core e SQLite.
 
 ## 🔐 Acesso ao Sistema
 
@@ -10,6 +10,17 @@ Sistema de gerenciamento para uma agência de turismo desenvolvido em ASP.NET Co
 | Senha   | `admin123` |
 
 > As credenciais estão definidas diretamente no código, sem uso de banco de dados, conforme especificado no enunciado.
+
+## 📌 Domínio do Sistema
+
+**Entidades principais:** Cliente, CidadeDestino, PaisDestino, PacoteTuristico, Reserva
+
+### Regras de Negócio
+
+- Um pacote turístico pode incluir vários destinos
+- Um cliente pode realizar várias reservas, mas não pode reservar o mesmo pacote mais de uma vez para a mesma data
+- Cada pacote turístico tem um número máximo de participantes; ao atingir esse número, novas reservas são bloqueadas
+- Apenas pacotes com data futura e vagas disponíveis podem ser reservados
 
 ## 🚀 Como Executar
 
