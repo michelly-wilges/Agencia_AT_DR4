@@ -17,7 +17,6 @@ namespace Agencia_AT_DR4.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Tamanhos máximos
             modelBuilder.Entity<PaisDestino>()
                 .Property(p => p.Nome).HasMaxLength(100);
 
@@ -39,7 +38,6 @@ namespace Agencia_AT_DR4.Data
             modelBuilder.Entity<Cliente>()
                 .Property(c => c.Email).HasMaxLength(150);
 
-            // Seed Data
             modelBuilder.Entity<PaisDestino>().HasData(
                 new PaisDestino { Id = 1, Nome = "Brasil", Codigo = "BR" },
                 new PaisDestino { Id = 2, Nome = "Argentina", Codigo = "AR" },
